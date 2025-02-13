@@ -39,7 +39,7 @@ public class Main {
 
 
 
-        //password.setLength(int maxlength);
+        password.setLength(int maxlength);
 
 
 
