@@ -1,11 +1,10 @@
 import java.util.Scanner;
-
+import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
-        StringBuilder password = new StringBuilder();
-
+        Random random = new Random();
+        
         // many characters for password
         final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
         final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -31,17 +30,24 @@ public class Main {
         System.out.print("Include symbols? (yes/no): ");
         boolean includeSymbols = input.next().equalsIgnoreCase("yes");
 
+        // set of symbols for password
         StringBuilder chars = new StringBuilder();
         if (includeLowercase) chars.append(LOWERCASE);
         if (includeUppercase) chars.append(UPPERCASE);
         if (includeDigits) chars.append(DIGITS);
         if (includeSymbols) chars.append(SYMBOLS);
 
+        // generate random length of password
+        int passwordLength = random.nextInt(maxlength-minlength+1) + minlength;
+        StringBuilder password = new StringBuilder();
 
+        // generate password
+        for (int i=0; i<passwordLength; i++){
+            int index = random.nextInt(chars.length());
+            password.append(chars.charAt(index));
+        }
 
-        password.setLength(int maxlength);
-
-
+        System.out.print("Generated password: " + password);
 
     }
 }
