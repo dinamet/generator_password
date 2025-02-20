@@ -1,6 +1,8 @@
+import javax.annotation.processing.Generated;
 import java.util.Scanner;
 import java.util.Random;
-public class Main {
+
+public class Password {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Random random = new Random();
@@ -21,7 +23,7 @@ public class Main {
         System.out.print("Include lowercase letters? (yes/no): ");
         boolean includeLowercase = input.next().equalsIgnoreCase("yes");
 
-        System.out.print("Include lowercase letters? (yes/no): ");
+        System.out.print("Include uppercase letters? (yes/no): ");
         boolean includeUppercase = input.next().equalsIgnoreCase("yes");
 
         System.out.print("Include digits? (yes/no): ");
@@ -47,7 +49,34 @@ public class Main {
             password.append(chars.charAt(index));
         }
 
+        System.out.println();
         System.out.print("Generated password: " + password);
 
+        int strength = getPasswordStrength(generatedPassword)
+        System.out.print("Password strength: " + getStrengthLabel(strength));
+
     }
+
+    public static int getPasswordStrength(String password) {
+        int score = 0;
+
+        // length of password
+
+        // presence of lowercase letters
+
+        // presence of uppercase letters
+
+        // presence of digits
+
+        // presence of symbols
+
+        // unique symbols
+
+
+        return score;
+    }
+
+    // strength of password
+
+
 }
