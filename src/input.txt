@@ -1,3 +1,4 @@
+1
 Enter the minimum length of password:6
 Enter the maximum length of password:10
 Include lowercase letters? (yes/no): yes
