@@ -1,4 +1,3 @@
-import javax.annotation.processing.Generated;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -6,7 +5,7 @@ public class Password {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Random random = new Random();
-        
+
         // many characters for password
         final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
         final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -50,10 +49,11 @@ public class Password {
         }
 
         System.out.println();
-        System.out.print("Generated password: " + password);
+        System.out.println("Generated password: " + password);
 
-        int strength = getPasswordStrength(generatedPassword)
-        System.out.print("Password strength: " + getStrengthLabel(strength));
+        // estimation of password complexity
+        int strength = getPasswordStrength(password.toString());
+        System.out.println("Password strength: " + getStrengthLabel(strength));
 
     }
 
@@ -61,22 +61,55 @@ public class Password {
         int score = 0;
 
         // length of password
+        if (password.length() >= 12) {
+            score+=2; // long password = 2 points
+        } else if (password.length() >= 8) {
+            score+=1; // medium length password = 1 points
+        } else {
+            score+=0; // short password = 0 points
+        }
 
         // presence of lowercase letters
+        if (password.matches(".*[a-z].*")) {
+            score+=1;
+        }
 
         // presence of uppercase letters
+        if (password.matches(".*[A-Z].*")) {
+            score+=1;
+        }
 
         // presence of digits
+        if (password.matches(".*[0-9].*")) {
+            score+=1;
+        }
 
         // presence of symbols
+        if (password.matches(".*[!@#$%^&*()\\-_=+\\[\\]{}|;:,.<>?/].*")) {
+            score+=1;
+        }
 
         // unique symbols
-
+        if (password.matches(".*[a-zA-Z0-9].*") && password.matches(".*[!@#$%^&*()-_=+\\[\\]{}|;:,.<>?/].*")) {
+            score+=1; // Если используются как буквы, так и символы
+        }
 
         return score;
     }
 
     // strength of password
-
-
+    public static String getStrengthLabel(int score) {
+        switch (score) {
+            case 6:
+                return "Very Strong";
+            case 5:
+                return "Strong";
+            case 4:
+                return "Medium";
+            case 3:
+                return "Weak";
+            default:
+                return "Very Weak";
+        }
+    }
 }
